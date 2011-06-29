@@ -28,7 +28,12 @@
 #    }
 
 
-import multiprocessing
+try:
+    import multiprocessing
+except:
+    class multiprocessing(object):
+        Process = object
+
 import threading
 import time
 import random
@@ -405,6 +410,13 @@ class LoadThread(LoadSubtask, threading.Thread):
             self.name = "Thread-"+subtask_info['operation_info']['prefix']
 
         self.log("Created")
+
+        # python 2.4 fix
+    def is_alive(self):
+        try:
+            return threading.Thread.is_alive(self)
+        except AttributeError:
+            return threading.Thread.isAlive(self)
 
     def log(self, msg):
         pass
