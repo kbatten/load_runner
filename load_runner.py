@@ -523,7 +523,7 @@ class LoadRunner(object):
             self.log("Running in DRYRUN mode")
 
         if task_info:
-            self.add(task_info)
+            self.add_task(task_info)
 
     # add a new task
     def add_task(self, task_info):
